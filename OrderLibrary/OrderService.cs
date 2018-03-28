@@ -8,13 +8,13 @@ namespace OrderLibrary
         {
             if (price < 1000)
             {
-                PriceDelegate calculateDiscountPrice = PriceComponent.CalculateDiscountPrice; 
+                Func<double, double> calculateDiscountPrice = PriceComponent.CalculateDiscountPrice; 
                 return calculateDiscountPrice(price);
             }
             else
             {
-                PriceDelegate calculateDiscountPrice = PriceComponent.CalculateDiscountPrice;
-                PriceDelegate calculateRebatePrice = PriceDecorator.CalculateRebatePrice(calculateDiscountPrice);
+                Func<double, double> calculateDiscountPrice = PriceComponent.CalculateDiscountPrice;
+                Func<double, double> calculateRebatePrice = PriceDecorator.CalculateRebatePrice(calculateDiscountPrice);
                 
                 return calculateRebatePrice(price);
             }
