@@ -8,11 +8,15 @@ namespace OrderLibrary
         {
             if (price < 1000)
             {
-                return price * 0.8;
+                PriceInterface discountComponent = new DiscountComponent();
+                return discountComponent.calculatePrice(price);
             }
             else
             {
-                return price * 0.8 - 100;
+                PriceInterface discountComponent = new DiscountComponent();
+                PriceInterface rebateDecorator = new RebateDecorator(discountComponent);
+
+                return rebateDecorator.calculatePrice(price);
             }
         }
     }
