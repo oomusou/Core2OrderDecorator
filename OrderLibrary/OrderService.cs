@@ -8,15 +8,15 @@ namespace OrderLibrary
         {
             if (price < 1000)
             {
-                PriceInterface discountComponent = new DiscountComponent();
-                return discountComponent.calculatePrice(price);
+                PriceDelegate calculateDiscountPrice = PriceComponent.CalculateDiscountPrice; 
+                return calculateDiscountPrice(price);
             }
             else
             {
-                PriceInterface discountComponent = new DiscountComponent();
-                var rebateDecorator = new RebateDecorator().Decorate(discountComponent);
+                PriceDelegate calculateDiscountPrice = PriceComponent.CalculateDiscountPrice;
+                PriceDelegate calculateRebatePrice = PriceDecorator.CalculateRebatePrice(calculateDiscountPrice);
                 
-                return rebateDecorator.calculatePrice(price);
+                return calculateRebatePrice(price);
             }
         }
     }
