@@ -14,8 +14,8 @@ namespace OrderLibrary
             else
             {
                 PriceInterface discountComponent = new DiscountComponent();
-                PriceInterface rebateDecorator = new RebateDecorator(discountComponent);
-
+                var rebateDecorator = new RebateDecorator().Decorate(discountComponent);
+                
                 return rebateDecorator.calculatePrice(price);
             }
         }
